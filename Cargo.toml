@@ -1,0 +1,8 @@
+[package]
+name = "blocked-domain-by-dns-detector"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+trust-dns-resolver = "0.23"
+dialoguer = "0.11"
