@@ -8,7 +8,7 @@ pub fn is_blocked(domain: &str, dns_server: &str) -> bool {
     let dns_ip: IpAddr = match dns_server.parse() {
         Ok(ip) => ip,
         Err(_) => {
-            eprintln!("Adresse DNS invalide : {}", dns_server);
+            eprintln!("Invalid DNS address : {}", dns_server);
             return false;
         }
     };
@@ -27,19 +27,16 @@ pub fn is_blocked(domain: &str, dns_server: &str) -> bool {
     let resolver: Resolver = match Resolver::new(resolver_config, resolver_opts) {
         Ok(r) => r,
         Err(e) => {
-            eprintln!("Erreur d'initialisation du résolveur DNS : {}", e);
+            eprintln!("Error initializing the DNS resolver : {}", e);
             return false;
         }
     };
 
     match resolver.lookup_ip(domain) {
-        Ok(lookup) => {
-            let ips: Vec<IpAddr> = lookup.iter().collect();
-            println!("Résolution réussie : {:?}", ips);
+        Ok(_) => {
             false
         }
-        Err(e) => {
-            println!("Erreur de résolution : {}", e);
+        Err(_) => {
             true
         }
     }
